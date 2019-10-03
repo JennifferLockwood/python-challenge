@@ -16,22 +16,23 @@ with open(csvpath, newline="") as csvfile:
     # Read the headers first
     csv_reader = next(csvreader)
 
-    #Set total amount of months, total of "Profit/Losses"
-    totalMonths = 0
-    totalProfitLosses = 0
+    # Initiating variables for financial analysis
+    dates = []
+    profitLosses = []
+    changeProfitLosses = []
 
+    # Set for loop for total amount of months and net total amount of "Profits/Losses".
     for row in csvreader:
         # month = (row[0].split("-"))
-        totalMonths += 1
-        profitLosses = int(row[1])
-        totalProfitLosses += profitLosses
+        dates.append(row[0])
+        profitLosses.append(float(row[1]))
         # print(month[0])
         # print(row[0].split("-"))
 
-    # Print final statements
+    # Print statements
     print("Financial Analysis")
     print("---------------------------")
-    print("Total Months: " + str(totalMonths))
-    print("Total: $" + str(totalProfitLosses))
+    print("Total Months: " + str(len(dates)))
+    print("Total: $" + str(sum(profitLosses)))
 
-    # print(csvreader)
+    
