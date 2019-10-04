@@ -4,7 +4,7 @@ import os
 import csv
 
 # Set path for file
-csvpath = os.path.join("C:/Users/Jenni/UNCCDABC/Homeworks/python-challenge", "budget_data.csv")
+csvpath = os.path.join("C:/Users/Jenni/UNCCDABC/Homeworks/python-challenge/PyBank", "budget_data.csv")
 
 # Export print statements to a text file
 def log(message):
@@ -19,18 +19,15 @@ with open(csvpath, newline="") as csvfile:
     # Read the headers first
     csv_reader = next(csvreader)
 
-    # Initiating variables for financial analysis
+    # Initiate variables for financial analysis
     dates = []
     profit_loss = []
     change_profit_loss = []
 
     # Set for loop for total amount of months and net total amount of "Profits/Losses".
     for row in csvreader:
-        # month = (row[0].split("-"))
         dates.append(row[0])
         profit_loss.append(float(row[1]))
-        # print(month[0])
-        # print(row[0].split("-"))
 
     # Print statements
     log("Financial Analysis")
