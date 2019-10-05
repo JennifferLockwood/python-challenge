@@ -7,10 +7,10 @@ import csv
 csvpath = os.path.join("C:/Users/Jenni/UNCCDABC/Homeworks/python-challenge/PyPoll", "election_data.csv")
 
 # Export print statements to a text file
-#def log(message):
-    #with open('C:/Users/Jenni/UNCCDABC/Homeworks/python-challenge/PyPoll/ElectionResults.txt', 'a+') as f:
-        #f.write(message + "\n")
-    #print(message)    
+def log(message):
+    with open('C:/Users/Jenni/UNCCDABC/Homeworks/python-challenge/PyPoll/ElectionResults.txt', 'a+') as f:
+        f.write(message + "\n")
+    print(message)    
 
 # Open the CSV, set variable that holds content and specify delimiter
 with open(csvpath, newline="") as csvfile:
@@ -21,10 +21,11 @@ with open(csvpath, newline="") as csvfile:
 
     # Initiate variable for elections results
     total_votes = 0
-    # candidates_list = []
     poll = {}
+    winner_votes = 0
+    winner = ""
 
-    # Set for loop to get elections results
+    # Set for loop to get total votes and votes per candidate
     for row in csvreader:
 
         total_votes +=1
@@ -35,21 +36,27 @@ with open(csvpath, newline="") as csvfile:
             poll[candidate_name] = poll[candidate_name] + 1
         else:
             poll[candidate_name] = 1
-        #candidate_vote[candidate_name] = 0
-        #candidate_vote[candidate_name] = candidate_vote[candidate_name] + 1
 
-    print("Election Results")
-    print("---------------------------")
-    print(f"Total Votes: {total_votes}")
-    print("---------------------------")
+    # Print total votes in the election
+    log("Election Results")
+    log("---------------------------")
+    log(f"Total Votes: {total_votes}")
+    log("---------------------------")
     
+    # Set for loop to get votes and percentage for each candidate.
+    # Also, get the winner of the election.
     for candidate in poll:
-         
+
         votes_per_candidate = poll.get(candidate)
         candidate_percentage = (votes_per_candidate / total_votes) * 100
 
-        #if candidate_name not in candidates_list:
-        #candidates_list.append(candidate_name)
-
-        print(f"{candidate}: {candidate_percentage:.2f}%({votes_per_candidate})")
+        log(f"{candidate}: {candidate_percentage:.3f}% ({votes_per_candidate})")
         #print(candidates_list)
+
+        if votes_per_candidate > winner_votes:
+            winner_votes = votes_per_candidate
+            winner = candidate
+
+    log("---------------------------")
+    log(f"Winner: {winner}")
+    log("---------------------------")
